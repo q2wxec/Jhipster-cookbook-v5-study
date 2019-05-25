@@ -60,6 +60,7 @@ spring:
     data:
         elasticsearch:
             properties:
+            cluster-nodes: 192.168.110.23:9300
                 path:
                     home: target/elasticsearch
     liquibase:
