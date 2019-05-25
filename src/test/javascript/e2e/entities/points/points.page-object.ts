@@ -45,28 +45,28 @@ export class PointsUpdatePage {
         return this.dateInput.getAttribute('value');
     }
 
-    async setExerciseInput(exercise) {
-        await this.exerciseInput.sendKeys(exercise);
+    async checkExerciseCheckBox() {
+        await this.exerciseInput.click();
     }
 
-    async getExerciseInput() {
-        return this.exerciseInput.getAttribute('value');
+    async getExerciseCheck() {
+        return this.exerciseInput.getAttribute('checked');
     }
 
-    async setMealsInput(meals) {
-        await this.mealsInput.sendKeys(meals);
+    async checkMealsCheckBox() {
+        await this.mealsInput.click();
     }
 
-    async getMealsInput() {
-        return this.mealsInput.getAttribute('value');
+    async getMealsCheck() {
+        return this.mealsInput.getAttribute('checked');
     }
 
-    async setAlcoholInput(alcohol) {
-        await this.alcoholInput.sendKeys(alcohol);
+    async checkAlcoholCheckBox() {
+        await this.alcoholInput.click();
     }
 
-    async getAlcoholInput() {
-        return this.alcoholInput.getAttribute('value');
+    async getAlcoholCheck() {
+        return this.alcoholInput.getAttribute('checked');
     }
 
     async setNotesInput(notes) {
