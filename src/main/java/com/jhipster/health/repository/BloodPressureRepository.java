@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface BloodPressureRepository extends JpaRepository<BloodPressure, Long> {
 
-    @Query("select bloodPressure from BloodPressure bloodPressure where bloodPressure.user.login = ?#{principal.username}")
+    @Query("select blood_pressure from BloodPressure blood_pressure where blood_pressure.user.login = ?#{principal.username}")
     List<BloodPressure> findByUserIsCurrentUser();
 
 }
