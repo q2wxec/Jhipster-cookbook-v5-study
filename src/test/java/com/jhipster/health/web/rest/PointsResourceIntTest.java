@@ -3,9 +3,12 @@ package com.jhipster.health.web.rest;
 import com.jhipster.health.TwentyOnePointsApp;
 
 import com.jhipster.health.domain.Points;
+import com.jhipster.health.domain.User;
 import com.jhipster.health.repository.PointsRepository;
+import com.jhipster.health.repository.UserRepository;
 import com.jhipster.health.repository.search.PointsSearchRepository;
 import com.jhipster.health.service.PointsService;
+import com.jhipster.health.service.UserService;
 import com.jhipster.health.service.dto.PointsDTO;
 import com.jhipster.health.service.mapper.PointsMapper;
 import com.jhipster.health.web.rest.errors.ExceptionTranslator;
@@ -26,6 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -39,8 +43,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 /**
  * Test class for the PointsResource REST controller.
@@ -65,6 +71,7 @@ public class PointsResourceIntTest {
 
     private static final String DEFAULT_NOTES = "AAAAAAAAAA";
     private static final String UPDATED_NOTES = "BBBBBBBBBB";
+
 
     @Autowired
     private PointsRepository pointsRepository;
@@ -102,10 +109,18 @@ public class PointsResourceIntTest {
 
     private Points points;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private WebApplicationContext context;
+
+
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PointsResource pointsResource = new PointsResource(pointsService);
+        final PointsResource pointsResource = new PointsResource(pointsService,userService);
         this.restPointsMockMvc = MockMvcBuilders.standaloneSetup(pointsResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -139,10 +154,17 @@ public class PointsResourceIntTest {
     @Transactional
     public void createPoints() throws Exception {
         int databaseSizeBeforeCreate = pointsRepository.findAll().size();
+         // Create security-aware mockMvc
+         restPointsMockMvc = MockMvcBuilders
+         .webAppContextSetup(context)
+         .apply(springSecurity())
+         .build();
+
 
         // Create the Points
         PointsDTO pointsDTO = pointsMapper.toDto(points);
         restPointsMockMvc.perform(post("/api/points")
+            .with(user("user"))
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(pointsDTO)))
             .andExpect(status().isCreated());
@@ -209,8 +231,14 @@ public class PointsResourceIntTest {
         // Initialize the database
         pointsRepository.saveAndFlush(points);
 
+        restPointsMockMvc = MockMvcBuilders
+            .webAppContextSetup(context)
+            .apply(springSecurity())
+            .build();
+
         // Get all the pointsList
-        restPointsMockMvc.perform(get("/api/points?sort=id,desc"))
+        restPointsMockMvc.perform(get("/api/points?sort=id,desc")
+            .with(user("admin").roles("ADMIN")))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(points.getId().intValue())))
@@ -220,7 +248,7 @@ public class PointsResourceIntTest {
             .andExpect(jsonPath("$.[*].alcohol").value(hasItem(DEFAULT_ALCOHOL)))
             .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getPoints() throws Exception {

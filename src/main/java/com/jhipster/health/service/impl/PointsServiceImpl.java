@@ -69,6 +69,20 @@ public class PointsServiceImpl implements PointsService {
             .map(pointsMapper::toDto);
     }
 
+    @Override
+    public Page<PointsDTO> findAllByOrderByDateDesc(Pageable pageable) {
+        log.debug("Request to get all Points order by date");
+        return pointsRepository.findAllByOrderByDateDesc(pageable)
+            .map(pointsMapper::toDto);
+    }
+
+    @Override
+    public Page<PointsDTO> findByUserIsCurrentUser(Pageable pageable) {
+        log.debug("Request to get all Points of Current User order by date");
+        return pointsRepository.findByUserIsCurrentUser(pageable)
+            .map(pointsMapper::toDto);
+    }
+
 
     /**
      * Get one points by id.

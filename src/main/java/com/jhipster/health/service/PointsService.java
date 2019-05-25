@@ -28,6 +28,21 @@ public interface PointsService {
      */
     Page<PointsDTO> findAll(Pageable pageable);
 
+    /**
+     * Get all the points order by date.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<PointsDTO> findAllByOrderByDateDesc(Pageable pageable);
+
+    /**
+     * Get all the points.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<PointsDTO> findByUserIsCurrentUser(Pageable pageable);
 
     /**
      * Get the "id" points.
@@ -48,7 +63,7 @@ public interface PointsService {
      * Search for the points corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */
