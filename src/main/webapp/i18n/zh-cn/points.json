@@ -14,14 +14,14 @@
                 "question": "你确定要删除 Points {{ id }} 吗？"
             },
             "detail": {
-                "title": "Points"
+                "title": "得分"
             },
-            "date": "Date",
-            "exercise": "Exercise",
-            "meals": "Meals",
-            "alcohol": "Alcohol",
-            "notes": "Notes",
-            "user": "User"
+            "date": "日期",
+            "exercise": "是否运动？",
+            "meals": "吃的是否健康",
+            "alcohol": "是否合理饮酒",
+            "notes": "附注",
+            "user": "用户"
         }
     }
 }
