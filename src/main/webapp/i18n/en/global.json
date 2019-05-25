@@ -9,6 +9,7 @@
                 "main": "Entities",
                 "points": "Points",
                 "goalSettings": "Goal Settings",
+                "weight": "Weight",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
