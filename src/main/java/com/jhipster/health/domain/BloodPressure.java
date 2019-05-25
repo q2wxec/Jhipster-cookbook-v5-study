@@ -17,7 +17,7 @@ import java.util.Objects;
  * A BloodPressure.
  */
 @Entity
-@Table(name = "blood_pressure")
+@Table(name = "bloodPressure")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "bloodpressure")
 public class BloodPressure implements Serializable {

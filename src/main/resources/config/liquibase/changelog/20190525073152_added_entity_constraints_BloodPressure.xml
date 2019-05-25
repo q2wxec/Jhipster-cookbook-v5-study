@@ -9,7 +9,7 @@
     <changeSet id="20190525073152-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="blood_pressure"
+                                 baseTableName="bloodPressure"
                                  constraintName="fk_blood_pressure_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>

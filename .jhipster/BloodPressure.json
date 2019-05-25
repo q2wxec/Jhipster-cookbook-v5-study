@@ -32,7 +32,7 @@
     "dto": "mapstruct",
     "searchEngine": "elasticsearch",
     "service": "serviceImpl",
-    "entityTableName": "blood_pressure",
+    "entityTableName": "bloodPressure",
     "databaseType": "sql",
     "jpaMetamodelFiltering": false,
     "pagination": "pagination"

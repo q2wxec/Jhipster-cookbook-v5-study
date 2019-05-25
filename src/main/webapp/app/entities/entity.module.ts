@@ -27,10 +27,6 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'blood-pressure',
                 loadChildren: './blood-pressure/blood-pressure.module#TwentyOnePointsBloodPressureModule'
-            },
-            {
-                path: 'blood-pressure',
-                loadChildren: './blood-pressure/blood-pressure.module#TwentyOnePointsBloodPressureModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])
