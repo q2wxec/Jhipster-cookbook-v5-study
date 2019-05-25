@@ -7,6 +7,14 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'points',
                 loadChildren: './points/points.module#TwentyOnePointsPointsModule'
+            },
+            {
+                path: 'goal-settings',
+                loadChildren: './goal-settings/goal-settings.module#TwentyOnePointsGoalSettingsModule'
+            },
+            {
+                path: 'goal-settings',
+                loadChildren: './goal-settings/goal-settings.module#TwentyOnePointsGoalSettingsModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

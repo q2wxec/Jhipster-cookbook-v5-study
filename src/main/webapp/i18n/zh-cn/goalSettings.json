@@ -1,0 +1,24 @@
+{
+    "twentyOnePointsApp": {
+        "goalSettings": {
+            "home": {
+                "title": "Goal Settings",
+                "createLabel": "创建新 Goal Settings",
+                "createOrEditLabel": "创建或编辑 Goal Settings",
+                "search": "查找 Goal Settings"
+            },
+            "created": "Goal Settings {{ param }} 创建成功",
+            "updated": "Goal Settings {{ param }} 更新成功",
+            "deleted": "Goal Settings {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Goal Settings {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Goal Settings"
+            },
+            "weeklyGoal": "Weekly Goal",
+            "weightUnits": "Weight Units",
+            "user": "User"
+        }
+    }
+}
